@@ -38,6 +38,7 @@
       :activeCount="activeCount"
       :completedCount="completedCount"
       :currentView="state.currentView"
+      @clearCompleted="handleClearCompleted"
     />
   </div>
 </template>
@@ -91,6 +92,10 @@ export default defineComponent({
 
     const handleSaveEditTodo = (todoToModify: ITodo, v: string) => {
       todoToModify.title = v
+    }
+
+    const handleClearCompleted = () => {
+      state.todos = state.todos.filter(t => !t.completed)
     }
 
     const activeCount = computed(() => state.todos.filter(t => !t.completed).length)
@@ -153,6 +158,7 @@ export default defineComponent({
       handleToggleTodo,
       handleDestroyTodo,
       handleSaveEditTodo,
+      handleClearCompleted,
     }
   },
 })

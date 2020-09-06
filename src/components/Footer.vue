@@ -13,11 +13,18 @@
         </a>
       </li>
     </ul>
+    <button
+      class="clear-completed"
+      v-show="completedCount"
+      @click="handleClearCompleted"
+    >
+      Clear completed
+    </button>
   </footer>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from '@vue/composition-api'
+import { computed, defineComponent, reactive } from '@vue/composition-api'
 
 import { VIEW_TYPES } from '../constants'
 
@@ -28,14 +35,18 @@ export default defineComponent({
     completedCount: Number,
     currentView: String,
   },
-  setup(props) {
-    const activeTodoWord = props.activeCount && props.activeCount > 1
+  setup(props, { emit }) {
+    const activeTodoWord = computed(() => props.activeCount && props.activeCount > 1
       ? 'items'
       : 'item'
+    )
+
+    const handleClearCompleted = () => emit('clearCompleted')
 
     return {
       activeTodoWord,
       viewTypes: reactive(VIEW_TYPES),
+      handleClearCompleted,
     }
   },
 })
