@@ -1,4 +1,6 @@
-# vue-composition-api-example
+# TodoMVC with Vue Composition API
+
+> This app is written in Vue 2 and Composition API
 
 ## Project setup
 ```

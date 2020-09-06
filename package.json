@@ -1,7 +1,14 @@
 {
-  "name": "vue-composition-api-example",
+  "name": "todomvc-vue-composition-api",
   "version": "0.1.0",
-  "private": true,
+  "author": {
+    "name": "dogrod",
+    "email": "rodrickjue@hotmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dogrod/todomvc-vue-composition-api"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
