@@ -14,7 +14,7 @@
         />
       </header>
       <section
-        v-if="state.todos.length"
+        v-show="state.todos.length"
         class="main"
       >
         <input
@@ -39,6 +39,7 @@
         </ul>
       </section>
       <TodoFooter
+        v-show="state.todos.length"
         :activeCount="activeCount"
         :completedCount="completedCount"
         :currentView="state.currentView"
