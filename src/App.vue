@@ -6,7 +6,7 @@
         v-model="state.newTodo"
         placeholder="What needs to be done?"
         class="new-todo"
-        @keydown="handleNewTodoKeyDown"
+        @keyup.enter="handleAddTodo"
       />
     </header>
     <section
@@ -47,7 +47,7 @@ import TodoItem from './components/TodoItem.vue'
 import Footer from './components/Footer.vue'
 
 import { todoStorage } from './todoStorage'
-import { ENTER_KEY, VIEW_TYPES } from './constants'
+import { VIEW_TYPES } from './constants'
 
 export default defineComponent({
   name: 'App',
@@ -66,8 +66,8 @@ export default defineComponent({
       currentView: VIEW_TYPES.all,
     })
 
-    const handleNewTodoKeyDown = (e: KeyboardEvent) => {
-      if (e.keyCode !== ENTER_KEY) {
+    const handleAddTodo = () => {
+      if (!state.newTodo) {
         return
       }
 
@@ -144,7 +144,7 @@ export default defineComponent({
       activeCount,
       filteredTodos,
       completedCount,
-      handleNewTodoKeyDown,
+      handleAddTodo,
       handleToggleTodo,
       handleDestroyTodo,
     }
