@@ -1,52 +1,61 @@
 <template>
-  <div id="app" class="todoapp">
-    <header class="header">
-      <h1>todos</h1>
-      <input
-        v-model="state.newTodo"
-        placeholder="What needs to be done?"
-        class="new-todo"
-        @keyup.enter="handleAddTodo"
-      />
-    </header>
-    <section
-      v-if="state.todos.length"
-      class="main"
-    >
-      <input
-        id="toggle-all"
-        class="toggle-all"
-        type="checkbox"
-        v-model="allDone"
-      />
-      <label for="toggle-all">
-        Mark all as complete
-      </label>
-      <ul class="todo-list">
-        <TodoItem
-          v-for="t in filteredTodos"
-          :key="t.id"
-          :title="t.title"
-          :completed="t.completed"
-          @toggle="handleToggleTodo(t)"
-          @destroy="handleDestroyTodo(t)"
-          @save="e => handleSaveEditTodo(t, e)"
+  <div id="app">
+    <section class="todoapp">
+      <header class="header">
+        <a class="logo" href="https://github.com/dogrod">
+          <img src="../public/d.png" />
+        </a>
+        <h1>todos</h1>
+        <input
+          v-model="state.newTodo"
+          placeholder="What needs to be done?"
+          class="new-todo"
+          @keyup.enter="handleAddTodo"
         />
-      </ul>
+      </header>
+      <section
+        v-if="state.todos.length"
+        class="main"
+      >
+        <input
+          id="toggle-all"
+          class="toggle-all"
+          type="checkbox"
+          v-model="allDone"
+        />
+        <label for="toggle-all">
+          Mark all as complete
+        </label>
+        <ul class="todo-list">
+          <TodoItem
+            v-for="t in filteredTodos"
+            :key="t.id"
+            :title="t.title"
+            :completed="t.completed"
+            @toggle="handleToggleTodo(t)"
+            @destroy="handleDestroyTodo(t)"
+            @save="e => handleSaveEditTodo(t, e)"
+          />
+        </ul>
+      </section>
+      <TodoFooter
+        :activeCount="activeCount"
+        :completedCount="completedCount"
+        :currentView="state.currentView"
+        @clearCompleted="handleClearCompleted"
+      />
     </section>
-    <Footer
-      :activeCount="activeCount"
-      :completedCount="completedCount"
-      :currentView="state.currentView"
-      @clearCompleted="handleClearCompleted"
-    />
+    <footer class="info">
+      <p>Double-click to edit a todo</p>
+      <p>Written by <a href="https://github.com/dogrod">dogrod</a></p>
+    </footer>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted, reactive, watch } from '@vue/composition-api'
 import TodoItem from './components/TodoItem.vue'
-import Footer from './components/Footer.vue'
+import TodoFooter from './components/Footer.vue'
 
 import { todoStorage } from './todoStorage'
 import { VIEW_TYPES } from './constants'
@@ -55,7 +64,7 @@ export default defineComponent({
   name: 'App',
   components: {
     TodoItem,
-    Footer,
+    TodoFooter,
   },
   setup() {
     const state: {
@@ -170,5 +179,15 @@ export default defineComponent({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.logo {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+}
+
+.logo img {
+  width: 40px;
 }
 </style>
