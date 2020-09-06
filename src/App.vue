@@ -30,6 +30,7 @@
           :completed="t.completed"
           @toggle="handleToggleTodo(t)"
           @destroy="handleDestroyTodo(t)"
+          @save="e => handleSaveEditTodo(t, e)"
         />
       </ul>
     </section>
@@ -86,6 +87,10 @@ export default defineComponent({
 
     const handleDestroyTodo = (todoToDestroy: ITodo) => {
       state.todos.splice(state.todos.indexOf(todoToDestroy), 1)
+    }
+
+    const handleSaveEditTodo = (todoToModify: ITodo, v: string) => {
+      todoToModify.title = v
     }
 
     const activeCount = computed(() => state.todos.filter(t => !t.completed).length)
@@ -147,6 +152,7 @@ export default defineComponent({
       handleAddTodo,
       handleToggleTodo,
       handleDestroyTodo,
+      handleSaveEditTodo,
     }
   },
 })

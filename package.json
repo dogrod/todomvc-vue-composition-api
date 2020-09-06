@@ -9,6 +9,7 @@
     "type": "git",
     "url": "https://github.com/dogrod/todomvc-vue-composition-api"
   },
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
