@@ -10,6 +10,7 @@
           v-model="state.newTodo"
           placeholder="What needs to be done?"
           class="new-todo"
+          autofocus
           @keyup.enter="handleAddTodo"
         />
       </header>
